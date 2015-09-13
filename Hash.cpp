@@ -103,6 +103,7 @@ void * hashTable::getPointer(const std::string &key, bool * b) {
 
 int hashTable::setPointer(const std::string &key, void * pv) {
 	int index = findPos(key);
+	// Test comment
 
 	// Return 1 if key not found in table
 	if (index == -1) {
