@@ -8,8 +8,6 @@ hashTable::hashTable(int size) {
 	filled = 0;
 
 	data.resize(capacity, hashItem());
-
-	cout << "Table size: " << data.size() << endl;
 }
 
 int hashTable::hash(const std::string &key) {
@@ -50,14 +48,10 @@ int hashTable::insert(const std::string &key, void *pv) {
 
 	// Rehash check
 	if ((unsigned int)++filled > (data.size() / 2)) {
-		cout << filled << "/" << capacity << " filled; rehashing..." << endl;
 		if (!rehash()) {
 			return 2;
 		}
-		cout << "Table rehashed to size " << capacity << endl;
 	}
-
-	//cout << filled << "/" << capacity << endl;
 
 	return 0;
 }
