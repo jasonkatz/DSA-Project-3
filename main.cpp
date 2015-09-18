@@ -19,9 +19,7 @@ int main() {
 	string outputName;
 
 	cout << "Enter a dictionary filename: ";
-	//cin >> dictionaryName;
-	dictionaryName = "wordlist_small.sdx"; // TEMP LINE
-	cout << dictionaryName << endl; // TEMP LINE
+	cin >> dictionaryName;
 
 	// Load dictionary into hash table
 	hashTable dictionary;
@@ -51,14 +49,10 @@ int main() {
 	cout << "Total time (in seconds) to load dictionary: " << timeDiff << endl;
 
 	cout << "Enter an input filename: ";
-	//cin >> inputName;
-	inputName = "lyrics.txt"; // TEMP LINE
-	cout << inputName << endl; // TEMP LINE
+	cin >> inputName;
 
 	cout << "Enter an output filename: ";
-	//cin >> outputName;
-	outputName = "output.txt"; // TEMP LINE
-	cout << outputName << endl; // TEMP LINE
+	cin >> outputName;
 
 	clock_t t3 = clock();
 
