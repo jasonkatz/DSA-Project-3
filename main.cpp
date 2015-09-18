@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <cstdlib>
 
 #include "Hash.h"
 
@@ -33,7 +34,7 @@ int main() {
 	// Load dictionary into hash table
 	hashTable dictionary;
 
-	ifstream dictionaryFile(dictionaryName);
+	ifstream dictionaryFile(dictionaryName.c_str());
 	if (!dictionaryFile) {
 		cout << "Error opening dictionary file" << endl;
 		exit(1);
@@ -45,7 +46,7 @@ int main() {
 	}
 
 	// Open input file
-	ifstream inputFile(inputName);
+	ifstream inputFile(inputName.c_str());
 	if (!inputFile) {
 		cout << "Error opening input file" << endl;
 		exit(1);
@@ -86,7 +87,7 @@ int main() {
 
 	cout << "Done reading" << endl;
 
-	system("pause");
+    system("pause");
 	return 0;
 }
 
