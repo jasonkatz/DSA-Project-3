@@ -138,7 +138,6 @@ int main() {
 	timeDiff = ((double) (t4 - t3)) / CLOCKS_PER_SEC;
 	cout << "Total time (in seconds) to check document: " << timeDiff << endl;
 
-    system("pause");
 	return 0;
 }
 
