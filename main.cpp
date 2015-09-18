@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <cstdlib>
+#include <algorithm>
 
 #include "Hash.h"
 
@@ -42,6 +43,8 @@ int main() {
 
 	string line;
 	while (getline(dictionaryFile, line)) {
+		// Make word lower case, then insert into dictionary
+		transform(line.begin(), line.end(), line.begin(), ::tolower);
 		dictionary.insert(line);
 	}
 
@@ -55,6 +58,7 @@ int main() {
 	char * current = new char[1];
 	string word = "";
 	int lineNumber = 1;
+	bool hasNumber = false;
 	
 	// Start main check loop:
 	// Read each character from the input file,
@@ -62,23 +66,35 @@ int main() {
 	// If so, append to current word,
 	// Else, reset the current word
 	while (inputFile.read(current, 1)) {
+		// Convert current to lowercase if uppercase
+		if (*current >= 'A' && *current <= 'Z') {
+			*current += 32;
+		}
 		// Incrememt line number counter on newline character
 		if (*current == '\n') {
 			++lineNumber;
 		}
 		if (wordLetter(*current)) {
 			word += *current;
+			if (*current >= '0' && *current <= '9') {
+				hasNumber = true;
+			}
 		} else {
 			if (word != "") {
-				// Dump out contains data
-				cout << word << "\t";
-				int wordStatus = checkWord(word, dictionary);
-				if (wordStatus == 0) {
-					cout << "Nothing wrong" << endl;
-				} else if (wordStatus == 1) {
-					cout << "Too long" << endl;
-				} else if (wordStatus == 2) {
-					cout << "Not in dictionary" << endl;
+				// Don't spellcheck if word contains number
+				if (!hasNumber) {
+					// Dump out contains data
+					cout << lineNumber << "\t" << word << "\t";
+					int wordStatus = checkWord(word, dictionary);
+					if (wordStatus == 0) {
+						cout << "Nothing wrong" << endl;
+					} else if (wordStatus == 1) {
+						cout << "Too long" << endl;
+					} else if (wordStatus == 2) {
+						cout << "Not in dictionary" << endl;
+					}
+				} else {
+					hasNumber = false;
 				}
 				word = "";
 			}
@@ -95,7 +111,7 @@ int main() {
 bool wordLetter(char c) {
 	return ((c >= '0' && c <= '9') || // numbers
 			(c >= 'a' && c <= 'z') || // lowercase letters
-			(c >= 'A' && c <= 'Z') || // uppercase letters
+			(c >= 'A' && c <= 'Z') || // uppercase letters (not really necessary)
 			c == '-' || c == '\'');   // - and '
 }
 
