@@ -70,10 +70,13 @@ int main() {
 		if (*current >= 'A' && *current <= 'Z') {
 			*current += 32;
 		}
-		// Incrememt line number counter on newline character
-		if (*current == '\n') {
-			++lineNumber;
+
+		// On file end, add char manually and ensure that wordLetter returns false
+		if (inputFile.peek() == EOF) {
+			word += *current;
+			*current = '\0';
 		}
+
 		if (wordLetter(*current)) {
 			word += *current;
 			if (*current >= '0' && *current <= '9') {
@@ -97,6 +100,11 @@ int main() {
 					hasNumber = false;
 				}
 				word = "";
+			}
+
+			// Incrememt line number counter on newline character
+			if (*current == '\n') {
+				++lineNumber;
 			}
 		}
 	}
