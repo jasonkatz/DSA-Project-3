@@ -88,10 +88,10 @@ int main() {
 		}
 
 		// On file end, add char manually and ensure that wordLetter returns false
-		if (inputFile.peek() == EOF) {
+		/*if (inputFile.peek() == EOF) {
 			word += *current;
 			*current = '\0'; // Change to separator character to wordLetter returns false
-		}
+		}*/
 
 		if (wordLetter(*current)) {
 			// If current is still a word letter, add to the current word
